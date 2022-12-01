@@ -1,0 +1,43 @@
+<div class="row text-center justify-content-center">
+  <div class="col-lg-6 ">
+    <div class="card mb-4 ">
+      <img height="60%" class="card-img-top" src="{{informacoesProduto?.productIcon}}">
+      <div class="card-body">
+        <h4 class="card-title ">{{informacoesProduto?.productName}}</h4>
+        <form name="form" #form='ngForm' (ngSubmit)="informacoesProduto?.productStatus == 0 && adicionarCarrinho()">
+          <div class="text-left">
+            <input hidden name="productId" [value]=informacoesProduto?.productId>
+            <p class="card-test"><strong>Descrição: </strong>{{informacoesProduto?.productDescription}}</p>
+            <p class="card-text">
+              <strong>Preço: </strong>
+              <label id="price">{{informacoesProduto?.productPrice | currency}}</label>
+            </p>
+            <p class="card-text"><strong>Estoque: </strong>{{informacoesProduto?.productStock}}</p>
+
+            <label class="card-text">
+              <strong>Quantidade: </strong>
+              <input [(ngModel)]=count
+                     (change)="validarEstoque()"
+                     type="number"
+                     name="count"
+                     required
+                     min="1"
+                     [max]=informacoesProduto?.productStock
+              >
+            </label>
+
+            <p class="card-text"><strong>Total: </strong>
+              <label id="subtotal">{{count * informacoesProduto?.productPrice | currency}}</label>
+            </p>
+          </div>
+          <button type="submit" [disabled]="!form.form.valid" *ngIf="informacoesProduto?.productStatus == 0; else offBlock"
+                  class="btn btn-primary btn-lg"
+          >Adicionar ao carrinho
+          </button>
+          <ng-template #offBlock><a class="btn btn-secondary btn-lg disabled">Indisponível</a></ng-template>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

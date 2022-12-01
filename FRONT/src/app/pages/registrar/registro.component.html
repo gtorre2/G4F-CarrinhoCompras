@@ -1,0 +1,63 @@
+<h1 align="center" class="display-4 mb-5">Registro</h1>
+<div style="width:40%; margin: 25px auto" >
+  <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label><b>Email</b></label>
+      <input [(ngModel)]="usuario.email" type="email" class="form-control form-control-lg" id="email" name="email"  email required autofocus  #email="ngModel">
+      <div  *ngIf="email.invalid && (email.dirty ||email.touched)" >
+          <div *ngIf="email.errors.required" >
+              Email é obrigatório.
+          </div>
+          <div *ngIf="email.errors.email">
+              Email inválido.
+          </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label><b>Nome</b></label>
+      <input [(ngModel)]="usuario.name" type="text" class="form-control form-control-lg" id="name" name="name" required #name="ngModel">
+        <div  *ngIf="name.invalid && (name.dirty ||name.touched)">
+            <div *ngIf="name.errors.required">
+                Nome é obrigatório.
+            </div>
+            <div *ngIf="name.errors.minlength">
+                Nome deve conter pelo menos 3 letras.
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+      <label><b>Senha</b></label>
+      <input  [(ngModel)]="usuario.password" type="password" class="form-control form-control-lg" id="password" name="password" minlength="3" required #password="ngModel">
+        <div  *ngIf="password.invalid && (password.dirty ||password.touched)">
+            <div *ngIf="password.errors.required">
+                Senha é obrigatória.
+            </div>
+            <div *ngIf="password.errors.minlength">
+                Senha deve ter pelo menos 3 letras.
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+      <label><b>Telefone</b></label>
+      <input [(ngModel)]="usuario.phone" type="text" class="form-control form-control-lg" id="phone" name="phone" required #phone="ngModel" >
+        <div  *ngIf="phone.invalid && (phone.dirty ||phone.touched)">
+            <div *ngIf="phone.errors.required">
+                Telefone é obrigatório.
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+      <label><b>Endereço</b></label>
+      <input [(ngModel)]="usuario.address" type="text" class="form-control form-control-lg" id="address" name="address" required #address="ngModel">
+        <div  *ngIf="address.invalid && (address.dirty ||address.touched)">
+            <div *ngIf="address.errors.required">
+                Endereço é obrigatório.
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!form.form.valid" >Registrar</button>
+    </div>
+  </form>
+</div>
+

@@ -1,0 +1,99 @@
+<h1 align="center" class="display-4 mb-5">Editar produto</h1>
+<div style="width:40%; margin: 25px auto">
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
+        <!--Id-->
+        <div class="form-group">
+            <label for="productId">Código</label>
+            <input [readOnly]="isEdit" [disabled]="isEdit" [(ngModel)]="produto.productId" type="text"
+                   class="form-control form-control-lg" #productIdInput
+                   id="productId" name="productId" required #productId="ngModel">
+            <div *ngIf="productIdInput.invalid && (productIdInput.dirty ||productIdInput.touched)">
+                <div *ngIf="productIdInput.errors.required">
+                    Nome é obrigatório.
+                </div>
+            </div>
+        </div>
+        <!--Photo-->
+        <div class="form-group">
+            <label>Link da foto</label>
+            <input [(ngModel)]="produto.productIcon" type="text" class="form-control form-control-lg" id="productIcon"
+                   name="productIcon" placeholder="foto">
+        </div>
+
+        <!--Name-->
+        <div class="form-group">
+            <label>Nome</label>
+            <input [(ngModel)]="produto.productName" type="text" class="form-control form-control-lg" id="productName"
+                   #productName="ngModel"
+                   name="productName" placeholder="Nome" required>
+        </div>
+        <div *ngIf="productName.invalid && (productName.dirty ||productName.touched)">
+            <div *ngIf="productName.errors.required">
+                Nome é obrigatório.
+            </div>
+        </div>
+
+        <!--Category-->
+        <div class="form-group">
+            <label for="categoryType">Categoria</label>
+            <select class="custom-select custom-select-lg " id="categoryType" name="categoryType"
+                    [(ngModel)]="produto.categoryType"
+                    required>
+                <option [ngValue]=0>Livros</option>
+            </select>
+        </div>
+
+        <!--Description-->
+        <div class="form-group">
+            <label>Descrição</label>
+            <textarea class="form-control form-control-lg text-left"
+                      id="productDescription" name="productDescription"
+                      placeholder="Description" [(ngModel)]="produto.productDescription"></textarea>
+        </div>
+        <!--Price-->
+        <div class="form-group">
+            <label for="productPrice">Preço</label>
+            <input class="form-control form-control-lg"
+                   type="number"
+                   id="productPrice"
+                   name="productPrice"
+                   #productPrice="ngModel"
+                   [ngModel]="produto.productPrice" (ngModelChange)="produto.productPrice=$event"
+                   required>
+            <div *ngIf="productPrice.invalid && (productPrice.dirty ||productPrice.touched)">
+                <div *ngIf="productPrice.errors.required">
+                    Preço é obrigatório.
+                </div>
+            </div>
+        </div>
+        <!--Stock-->
+        <div class="form-group">
+            <label for="productStock">Estoque</label>
+            <input class="form-control form-control-lg"
+                   type="number"
+                   id="productStock"
+                   name="productStock"
+                   min="0" #productStock="ngModel"
+                   [(ngModel)]="produto.productStock"
+                   required>
+            <div *ngIf="productStock.invalid && (productStock.dirty ||productStock.touched)">
+                <div *ngIf="productStock.errors.required">
+                    Estoque é obrigatório.
+                </div>
+            </div>
+        </div>
+        <!--Status-->
+        <div class="form-group">
+            <label for="productStatus">Status</label>
+            <select class="custom-select custom-select-lg " id="productStatus" name="productStatus" required
+                    [(ngModel)]="produto.productStatus">
+                <option [ngValue]=0>Disponível</option>
+                <option [ngValue]=1>Indisponível</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" [disabled]="!form.form.valid" class="btn btn-lg btn-primary btn-block">Salvar</button>
+        </div>
+    </form>
+
+</div>

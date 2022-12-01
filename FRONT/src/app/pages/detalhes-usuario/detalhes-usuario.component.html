@@ -1,0 +1,55 @@
+<h1 align="center" class="display-4 mb-5">Editar usuário</h1>
+<div style="width:40%; margin: 25px auto" >
+  <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label><b>Email</b></label>
+        <input readonly [value]=usuario?.email type="email" class="form-control form-control-lg " disabled id="email"
+               name="email" placeholder="Email">
+    </div>
+    <div class="form-group">
+      <label><b>Nome</b></label>
+      <input [(ngModel)]="usuario.name" type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Nome" required #name="ngModel" autofocus>
+      <div  *ngIf="name.invalid && (name.dirty || name.touched)">
+        <div *ngIf="name.errors.required">
+          Nome é obrigatório.
+        </div>
+        <div *ngIf="name.errors.minlength">
+          Nome deve ter pelo menos 3 letras.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label><b>Senha</b></label>
+      <input  [(ngModel)]="usuario.password" type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Password" minlength="3" required #password="ngModel">
+      <div  *ngIf="password.invalid && (password.dirty ||password.touched)">
+        <div *ngIf="password.errors.required">
+          Senha é obrigatória.
+        </div>
+        <div *ngIf="password.errors.minlength">
+          Senha deve ter pelo menos 3 letras.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label><b>Telefone</b></label>
+      <input [(ngModel)]="usuario.phone" type="text" class="form-control form-control-lg" id="phone" name="phone" placeholder="Phone" required #phone="ngModel" >
+      <div  *ngIf="phone.invalid && (phone.dirty ||phone.touched)">
+        <div *ngIf="phone.errors.required">
+          Telefone é obrigatório.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label><b>Endereço</b></label>
+      <input [(ngModel)]="usuario.address" type="text" class="form-control form-control-lg" id="address" name="address" placeholder="Address" required #address="ngModel">
+      <div  *ngIf="address.invalid && (address.dirty ||address.touched)">
+        <div *ngIf="address.errors.required">
+          Endereço é obrigatório.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!form.form.valid" >Atualizar</button>
+    </div>
+  </form>
+</div>

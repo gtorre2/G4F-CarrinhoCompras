@@ -1,0 +1,28 @@
+<h1 align="center" class="display-4 mb-5">Detalhes da compra</h1>
+<table class="table table-striped text-center">
+    <thead>
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">Produto</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Preço</th>
+        <th scope="col">Quantidade</th>
+        <th scope="col">Total</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of (pedido$ | async)?.products">
+        <th class="align-middle" scope="row">
+            <a routerLink="/comprador/produto/{{item.productId}}/edit"><img height="100px" src="{{item.productIcon}}"
+                                                                         alt="{{item.productName}}"></a>
+        </th>
+        <td class="align-middle"><a routerLink="/comprador/produto/{{item.productId}}/edit">{{item.productName}}</a></td>
+        <td class="align-middle">{{item.productDescription}}</td>
+        <td class="align-middle">{{item.productPrice | currency}}</td>
+        <td class="align-middle">{{item.count}}</td>
+        <td class="align-middle">{{(item.productPrice * item.count | currency)}}</td>
+    </tr>
+    </tbody>
+</table>
+<h5 style="display: inline" class="float-right">Total: {{(pedido$ | async)?.orderAmount | currency}}</h5>
